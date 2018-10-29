@@ -43,7 +43,7 @@ public extension ClusterManagerDelegate {
 
 open class ClusterManager {
     
-    var tree = QuadTree(rect: .world)
+    var tree = QuadTree(rect: MKMapRectWorld)
     
     /**
      The size of each cell on the grid (The larger the size, the better the performance).
@@ -124,7 +124,7 @@ open class ClusterManager {
      The objects in this array must adopt the MKAnnotation protocol. If no annotations are associated with the cluster manager, the value of this property is an empty array.
      */
     open var annotations: [MKAnnotation] {
-        return tree.annotations(in: .world)
+        return tree.annotations(in: MKMapRectWorld)
     }
     
     /**
@@ -196,7 +196,7 @@ open class ClusterManager {
      */
     open func removeAll() {
         queue.cancelAllOperations()
-        tree = QuadTree(rect: .world)
+        tree = QuadTree(rect: MKMapRectWorld)
     }
     
     /**

@@ -17,12 +17,12 @@ extension MKMapRect {
         self.init(origin: MKMapPoint(x: x, y: y), size: MKMapSize(width: width, height: height))
     }
     func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
-        return self.contains(MKMapPoint(coordinate))
+        return MKMapRectContainsPoint(self, MKMapPointForCoordinate(coordinate))
     }
 }
 
 let CLLocationCoordinate2DMax = CLLocationCoordinate2D(latitude: 90, longitude: 180)
-let MKMapPointMax = MKMapPoint(CLLocationCoordinate2DMax)
+let MKMapPointMax = MKMapPointForCoordinate(CLLocationCoordinate2DMax)
 
 extension CLLocationCoordinate2D: Hashable {
     public var hashValue: Int {
@@ -36,7 +36,7 @@ public func ==(lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool
 
 extension Double {
     var zoomLevel: Double {
-        let maxZoomLevel = log2(MKMapSize.world.width / 256) // 20
+        let maxZoomLevel = log2(MKMapSizeWorld.width / 256) // 20
         let zoomLevel = floor(log2(self) + 0.5) // negative
         return max(0, maxZoomLevel + zoomLevel) // max - current
     }

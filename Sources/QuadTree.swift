@@ -125,7 +125,7 @@ extension QuadTreeNode: AnnotationsContainer {
     }
     
     func annotations(in rect: MKMapRect) -> [MKAnnotation] {
-        guard self.rect.intersects(rect) else { return [] }
+        guard MKMapRectIntersectsRect(self.rect, rect) else { return [] }
         
         var result = [MKAnnotation]()
         
